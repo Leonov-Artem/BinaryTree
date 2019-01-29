@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Binary_Tree
 {
-    class Node
+    class Node<T> : INode<T>
     {
+        T data;
+        Node<T> LeftChild;
+        Node<T> RightChild;
     }
 }

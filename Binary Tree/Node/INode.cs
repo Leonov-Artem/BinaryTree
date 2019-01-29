@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Binary_Tree
 {
-    interface INode
+    interface INode<T>
     {
+        // void DisplayNode()
     }
 }
