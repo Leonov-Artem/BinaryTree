@@ -12,21 +12,54 @@ namespace Binary_Tree
 
         public Node<T> Find(T key)
         {
-            Node<T> current = Root;
-            while(current.data.CompareTo(key) != 0)
+            Node<T> Current = Root;
+            while(key.CompareTo(Current.data) != 0)
             {
-                if (key.CompareTo(current.data) < 0)
-                    current = current.LeftChild;
+                if (key.CompareTo(Current.data) < 0)
+                    Current = Current.LeftChild;
                 else
-                    current = current.RightChild;
+                    Current = Current.RightChild;
 
-                if (current == null) return null;
+                if (Current == null) return null;
             }
             return null;
         }
         public void Insert(T value)
         {
+            Node<T> NewNode = new Node<T>();
+            NewNode.data = value;
 
+            if (Root == null)
+                Root = NewNode;
+            else
+            {
+                Node<T> Current = Root;
+                Node<T> Parent;
+
+                while(true)
+                {
+                    Parent = Current;
+
+                    if (value.CompareTo(Current.data) < 0)
+                    {
+                        Current = Current.LeftChild;
+                        if (Current == null)
+                        {
+                            Parent.LeftChild = NewNode;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Current = Current.RightChild;
+                        if (Current == null)
+                        {
+                            Parent.RightChild = NewNode;
+                            return;
+                        }
+                    }
+                }
+            }
         }
         public void Delete(T key)
         {
