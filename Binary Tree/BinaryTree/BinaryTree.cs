@@ -80,6 +80,18 @@ namespace Binary_Tree
             }
             return Min;
         }
+        private Node<T> Maximum()
+        {
+            Node<T> Current = Root;
+            Node<T> Max = null;
+
+            while (Current != null)
+            {
+                Max = Current;
+                Current = Current.RightChild;
+            }
+            return Max;
+        }
         /////////////////////////////////////////////////
         // симметричный обход дерева
         private void InOrder(Node<T> node)
