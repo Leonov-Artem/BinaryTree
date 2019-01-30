@@ -66,6 +66,21 @@ namespace Binary_Tree
             
         }
 
+
+        /////////////////////////////////////////////////
+        private Node<T> Minimun()
+        {
+            Node<T> Current = Root;
+            Node<T> Min = null;
+
+            while(Current != null)
+            {
+                Min = Current;
+                Current = Current.LeftChild;
+            }
+            return Min;
+        }
+        /////////////////////////////////////////////////
         // симметричный обход дерева
         private void InOrder(Node<T> node)
         {
@@ -84,6 +99,11 @@ namespace Binary_Tree
             PreOrder(node.RightChild);
         }
         // обход дерева в обратном порядке
-        private void PostOrder
+        private void PostOrder(Node<T> node)
+        {
+            PostOrder(node.LeftChild);
+            PostOrder(node.RightChild);
+            Console.WriteLine(node.data);
+        }
     }
 }
