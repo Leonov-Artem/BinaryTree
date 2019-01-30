@@ -24,6 +24,28 @@ namespace Binary_Tree
             }
             return null;
         }
+        private void Find(T key, out Node<T> Current, out Node<T> Parent, out bool IsLeftChild)
+        {
+            Current = Parent = Root;
+            IsLeftChild = true;
+
+            while(key.CompareTo(Current.data) != 0)
+            {
+                if (key.CompareTo(Current.data) < 0)
+                {
+                    Current = Current.LeftChild;
+                    IsLeftChild = true;
+                }
+                else
+                {
+                    Current = Current.RightChild;
+                    IsLeftChild = false;
+                }
+
+                if (Current == null) return;
+            }
+        }
+
         public void Insert(T value)
         {
             Node<T> NewNode = new Node<T>();
