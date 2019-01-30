@@ -63,7 +63,7 @@ namespace Binary_Tree
         }
         public void Delete(T key)
         {
-
+            
         }
 
         // симметричный обход дерева
@@ -75,6 +75,13 @@ namespace Binary_Tree
                 Console.WriteLine(node.data);
                 Inorder(node.RightChild);
             }
+        }
+        // обход дерева в прямом порядке
+        private void Preorder(Node<T> node)
+        {
+            Console.WriteLine(node.data);
+            Preorder(node.LeftChild);
+            Preorder(node.RightChild);
         }
     }
 }
