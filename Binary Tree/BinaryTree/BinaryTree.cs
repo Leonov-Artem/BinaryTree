@@ -67,21 +67,23 @@ namespace Binary_Tree
         }
 
         // симметричный обход дерева
-        private void Inorder(Node<T> node)
+        private void InOrder(Node<T> node)
         {
             if (node != null)
             {
-                Inorder(node.LeftChild);
+                InOrder(node.LeftChild);
                 Console.WriteLine(node.data);
-                Inorder(node.RightChild);
+                InOrder(node.RightChild);
             }
         }
         // обход дерева в прямом порядке
-        private void Preorder(Node<T> node)
+        private void PreOrder(Node<T> node)
         {
             Console.WriteLine(node.data);
-            Preorder(node.LeftChild);
-            Preorder(node.RightChild);
+            PreOrder(node.LeftChild);
+            PreOrder(node.RightChild);
         }
+        // обход дерева в обратном порядке
+        private void PostOrder
     }
 }
