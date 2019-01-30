@@ -65,5 +65,16 @@ namespace Binary_Tree
         {
 
         }
+
+        // симметричный обход дерева
+        private void Inorder(Node<T> node)
+        {
+            if (node != null)
+            {
+                Inorder(node.LeftChild);
+                Console.WriteLine(node.data);
+                Inorder(node.RightChild);
+            }
+        }
     }
 }
