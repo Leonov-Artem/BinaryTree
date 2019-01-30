@@ -8,7 +8,7 @@ namespace Binary_Tree
 {
     interface IBinaryTree<T>
     {
-        void Find(T key);
+        Node<T> Find(T key);
         void Insert(T value);
         void Delete(T key);
     }

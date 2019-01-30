@@ -8,8 +8,8 @@ namespace Binary_Tree
 {
     class Node<T> : INode<T>
     {
-        T data;
-        Node<T> LeftChild;
-        Node<T> RightChild;
+        public T data;
+        public Node<T> LeftChild;
+        public Node<T> RightChild;
     }
 }
