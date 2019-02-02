@@ -24,7 +24,7 @@ namespace Binary_Tree
             }
             return null;
         }
-        private void Find(T key, out Node<T> Current, out Node<T> Parent, out bool IsLeftChild)
+        private bool Find(T key, out Node<T> Current, out Node<T> Parent, out bool IsLeftChild)
         {
             Current = Parent = Root;
             IsLeftChild = true;
@@ -42,8 +42,9 @@ namespace Binary_Tree
                     IsLeftChild = false;
                 }
 
-                if (Current == null) return;
+                if (Current == null) return false;
             }
+            return true;
         }
 
         public void Insert(T value)
@@ -88,7 +89,29 @@ namespace Binary_Tree
             
         }
 
+        private Node<T> GetSuccessor(Node<T> RemoveNode)
+        {
+            Node<T> SuccessorParent, Successor, Current;
 
+            SuccessorParent = Successor = RemoveNode;
+            Current = RemoveNode.RightChild;            // Переход к правому потомку
+
+            while (Current != null)                     // Пока остаются левые потомки
+            {
+                SuccessorParent = Successor;
+                Successor = Current;
+                Current = Current.LeftChild;            // Переход к левому потомку
+            }
+            // Если преемник не является
+            // правым потомком,
+            if (Successor != RemoveNode.RightChild)     
+            { 
+                // создать связи между узлами
+                SuccessorParent.LeftChild = Successor.RightChild;
+                Successor.RightChild = RemoveNode.RightChild;
+            }
+            return Successor;
+        }
         /////////////////////////////////////////////////
         private Node<T> Minimun()
         {
