@@ -87,7 +87,57 @@ namespace Binary_Tree
         }
         public void Delete(T key)
         {
-            
+            if (Find(key, out Node<T> Current, out Node<T> Parent, out bool IsLeftChild))
+            {
+                // 1-ый случай: удаление листового узла
+                if (Current.LeftChild == null && Current.RightChild == null)
+                {
+                    if (Current == Root)
+                        Root = null;
+                    else if (IsLeftChild)
+                        Parent.LeftChild = null;
+                    else
+                        Parent.RightChild = null;
+                }
+
+                // 2-ой случай: удаление узла с одним потомком
+                else if (Current.RightChild == null)            // если нет правого потомка, то узел заменяется левым поддеревом
+                {
+                    if (Current == Root)                        // если корень
+                        Root = Current.LeftChild;
+                    else if (IsLeftChild)                       // если узел левый потомок родителя
+                        Parent.LeftChild = Current.LeftChild;
+                    else                                        // если узел правый потомок родителя
+                        Parent.RightChild = Current.LeftChild;
+                }
+                else if (Current.LeftChild == null)             // если нет левого потомка, то узел заменяется правым поддеревом
+                {
+                    if (Current == Root)                        // если корень
+                        Root = Current.RightChild;
+                    else if (IsLeftChild)                       // если узел левый потомок родителя
+                        Parent.LeftChild = Current.RightChild;
+                    else                                        // если узел правый потомок родителя
+                        Parent.RightChild = Current.RightChild;
+                }
+
+                // 3-й случай: удаление узла с двумя потомками
+                // заменяем узел приемником
+                else
+                {
+                    // Поиск преемника для удаляемого узла (current)
+                    // Преемник не может иметь левого потомка
+                    Node<T> Successor = GetSuccessor(Current, out Node<T> SuccessorParent);
+                    Current.data = Successor.data;
+
+                    // если преемник левый потомок 
+                    if (Successor != Current.RightChild)
+                        SuccessorParent.LeftChild = Successor.RightChild;
+                    else
+                        Current.RightChild = Successor.RightChild;
+                }
+
+            }
+            else return;
         }
 
         private Node<T> GetSuccessor(Node<T> RemoveNode, out Node<T> SuccessorParent)
