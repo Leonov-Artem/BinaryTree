@@ -8,7 +8,7 @@ namespace Binary_Tree
 {
     class BinaryTree<T> : IBinaryTree<T> where T : IComparable
     {
-        private Node<T> Root;
+        public Node<T> Root;
 
         public Node<T> Find(T key)
         {
@@ -31,6 +31,7 @@ namespace Binary_Tree
 
             while(key.CompareTo(Current.data) != 0)
             {
+                Parent = Current;
                 if (key.CompareTo(Current.data) < 0)
                 {
                     Current = Current.LeftChild;
@@ -89,10 +90,9 @@ namespace Binary_Tree
             
         }
 
-        private Node<T> GetSuccessor(Node<T> RemoveNode)
+        private Node<T> GetSuccessor(Node<T> RemoveNode, out Node<T> SuccessorParent)
         {
-            Node<T> SuccessorParent, Successor, Current;
-
+            Node<T> Successor, Current;
             SuccessorParent = Successor = RemoveNode;
             Current = RemoveNode.RightChild;            // Переход к правому потомку
 
@@ -102,14 +102,7 @@ namespace Binary_Tree
                 Successor = Current;
                 Current = Current.LeftChild;            // Переход к левому потомку
             }
-            // Если преемник не является
-            // правым потомком,
-            if (Successor != RemoveNode.RightChild)     
-            { 
-                // создать связи между узлами
-                SuccessorParent.LeftChild = Successor.RightChild;
-                Successor.RightChild = RemoveNode.RightChild;
-            }
+
             return Successor;
         }
         /////////////////////////////////////////////////
@@ -139,7 +132,7 @@ namespace Binary_Tree
         }
         /////////////////////////////////////////////////
         // симметричный обход дерева
-        private void InOrder(Node<T> node)
+        public void InOrder(Node<T> node)
         {
             if (node != null)
             {
