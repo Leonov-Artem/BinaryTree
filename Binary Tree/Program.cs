@@ -23,7 +23,7 @@ namespace Binary_Tree
             binaryTree.Insert(69);
             binaryTree.Insert(23);
 
-            binaryTree.Delete(23);
+            binaryTree.Delete(35);
             binaryTree.InOrder(binaryTree.Root);
 
             //binaryTree.Insert(50);

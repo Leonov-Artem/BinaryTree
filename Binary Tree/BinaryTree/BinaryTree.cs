@@ -121,15 +121,16 @@ namespace Binary_Tree
                 }
 
                 // 3-й случай: удаление узла с двумя потомками
-                // заменяем узел приемником
+                // заменяем узел преемником
                 else
                 {
                     // Поиск преемника для удаляемого узла (current)
-                    // Преемник не может иметь левого потомка
+                    // Преемник не может иметь левого потомка (следует из определения)
                     Node<T> Successor = GetSuccessor(Current, out Node<T> SuccessorParent);
                     Current.data = Successor.data;
 
-                    // если преемник левый потомок 
+                    // если преемник левый потомок
+                    // если преемник имеет потомка, то это может быть только правый потомок
                     if (Successor != Current.RightChild)
                         SuccessorParent.LeftChild = Successor.RightChild;
                     else
